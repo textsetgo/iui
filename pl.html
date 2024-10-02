@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media URL Submission</title>
+  <style>
+    /* Body and Background Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      background: linear-gradient(to bottom, #ff007f, #ff7f50); /* Pink-Red Gradient */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Ad Styling */
+    .ad-container {
+      width: 100%;
+      background-color: #f1f1f1; /* Light gray for ad area */
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* Centered White Box */
+    .box {
+      background-color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title */
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Input Field */
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Submit Button */
+    .btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ad Section at the Top -->
+  <div class="ad-container">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4381106791115188"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4381106791115188"
+         data-ad-slot="3832037090"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Center Box for URL Submission -->
+  <div class="box">
+    <h1>Your social media link</h1>
+    <input type="text" id="urlInput" placeholder="Paste your URL here">
+    <button class="btn" id="submitBtn">Submit</button>
+  </div>
+
+  <!-- Ad Section at the Bottom -->
+  <div class="ad-container">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4381106791115188"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-format="autorelaxed"
+         data-ad-client="ca-pub-4381106791115188"
+         data-ad-slot="8445235378"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js"></script>
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBfLa8DjKOLmQ_N8s5e5Iy6iVuYPU9HN2U",
+      authDomain: "polylearn-81e2b.firebaseapp.com",
+      databaseURL: "https://polylearn-81e2b-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "polylearn-81e2b",
+      storageBucket: "polylearn-81e2b.appspot.com",
+      messagingSenderId: "735447104685",
+      appId: "1:735447104685:web:8ac87713fabac2401a9a24"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Submit URL and Save to Firebase
+    document.getElementById("submitBtn").addEventListener("click", () => {
+      const url = document.getElementById("urlInput").value;
+
+      if (url) {
+        // Save URL to Firebase
+        const urlRef = database.ref("urls").push();
+        urlRef.set({
+          url: url
+        }).then(() => {
+          alert("URL saved to Firebase!");
+          document.getElementById("urlInput").value = ""; // Clear input field
+        }).catch((error) => {
+          alert("Error saving URL: " + error.message);
+        });
+      } else {
+        alert("Please enter a URL.");
+      }
+    });
+  </script>
+
+</body>
+</html>
